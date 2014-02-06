@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Text;
 
 using Google.Apis.Json;
@@ -35,6 +36,7 @@ namespace WalletObjectsSample.Utils
   public class WobUtils
   {
     String issuer;
+    String [] origins;
     IList<LoyaltyObject> loyaltyObjects = new List<LoyaltyObject>();
     IList<OfferObject> offerObjects = new List<OfferObject>();
     RSACryptoServiceProvider key;
@@ -42,6 +44,7 @@ namespace WalletObjectsSample.Utils
     public WobUtils(String iss, X509Certificate2 cert)
     {
       issuer = iss;
+      origins = WebConfigurationManager.AppSettings["Origins"].Split(' ');
       RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)cert.PrivateKey;
       byte[] privateKeyBlob = rsa.ExportCspBlob(true);
       key = new RSACryptoServiceProvider();
@@ -83,7 +86,8 @@ namespace WalletObjectsSample.Utils
           loyaltyObjects = loyaltyObjects,
           offerObjects = offerObjects
         },
-        Origins  = new []{"http://localhost:59113"}
+        Origins = origins
+        //Origins  = new []{"http://localhost:59113"}
       };
 
       return NewtonsoftJsonSerializer.Instance.Serialize(jwtContainer);
