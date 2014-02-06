@@ -42,11 +42,17 @@ namespace WalletObjectsSample.Handlers
       try {
         HttpRequest request = context.Request;
 
+        // get credentials and settings
         WobCredentials credentials = new WobCredentials(
         WebConfigurationManager.AppSettings["ServiceAccountId"],
         WebConfigurationManager.AppSettings["ServiceAccountPrivateKey"],
         WebConfigurationManager.AppSettings["ApplicationName"],
         WebConfigurationManager.AppSettings["IssuerId"]);
+
+        string loyaltyClassId = WebConfigurationManager.AppSettings["LoyaltyClassId"];
+        string loyaltyObjectId = WebConfigurationManager.AppSettings["LoyaltyObjectId"];
+        string offerClassId = WebConfigurationManager.AppSettings["OfferClassId"];
+        string offerObjectId = WebConfigurationManager.AppSettings["OfferObjectId"];
 
         // OAuth - setup certificate based on private key file
         X509Certificate2 certificate = new X509Certificate2(
@@ -60,11 +66,11 @@ namespace WalletObjectsSample.Handlers
         string type = request.Params["type"];
 
         if (type.Equals("loyalty")) {
-	        LoyaltyObject loyaltyObject = Loyalty.generateLoyaltyObject(credentials.IssuerId, "LoyaltyClass", "LoyaltyObject");
+          LoyaltyObject loyaltyObject = Loyalty.generateLoyaltyObject(credentials.IssuerId, loyaltyClassId, loyaltyObjectId);
           utils.addObject(loyaltyObject);
         }
         else if (type.Equals("offer")) {
-          OfferObject offerObject = Offer.generateOfferObject(credentials.IssuerId, "OfferClass", "OfferObject");
+          OfferObject offerObject = Offer.generateOfferObject(credentials.IssuerId, offerClassId, offerObjectId);
           utils.addObject(offerObject);
         }
 
