@@ -131,11 +131,11 @@ namespace WalletObjectsSample.Verticals
             // Define general messages
             IList<WalletObjectMessage> messages = new List<WalletObjectMessage>();
             WalletObjectMessage message = new WalletObjectMessage();
-            message.Header = "Welcome";
-            message.Body = "Welcome to Banconrista Rewards!";
+            message.Header = "Welcome to Banconrista Rewards!";
+            message.Body = "Featuring our new bacon donuts.";
 
             Uri imageUri = new Uri();
-            imageUri.UriValue = "https://ssl.gstatic.com/codesite/ph/images/search-48.gif";
+            imageUri.UriValue = "http://farm8.staticflickr.com/7302/11177240353_115daa5729_o.jpg";
             Image messageImage = new Image();
             messageImage.SourceUri = imageUri;
             message.Image = messageImage;
@@ -187,7 +187,7 @@ namespace WalletObjectsSample.Verticals
             wobClass.HomepageUri = homepageUri;
 
             Uri logoImageUri = new Uri();
-            logoImageUri.UriValue = "http://www.google.com/landing/chrome/ugc/chrome-icon.jpg"; 
+            logoImageUri.UriValue = "http://farm8.staticflickr.com/7340/11177041185_a61a7f2139_o.jpg"; 
             Image logoImage = new Image();
             logoImage.SourceUri = logoImageUri;
             wobClass.ProgramLogo = logoImage;
