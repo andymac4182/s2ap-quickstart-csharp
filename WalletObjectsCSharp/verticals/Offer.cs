@@ -24,80 +24,68 @@ namespace WalletObjectsSample.Verticals
 	{
 	  public static OfferObject generateOfferObject(string issuerId, string classId, string objectId)
 	  {
-		  Barcode barcode = new Barcode();
-      barcode.Type = "upcA";
-      barcode.Value ="123456789012";
-      barcode.AlternateText = "12345";
-      barcode.Label = "User Id";
+      Barcode barcode = new Barcode() {
+        Type = "upcA",
+        Value = "123456789012",
+        AlternateText = "12345",
+        Label = "User Id"
+      };
 
 		  // Define Wallet Object
-		  OfferObject offobj = new OfferObject();
-      offobj.ClassId = issuerId + "." + classId;
-      offobj.Id = issuerId + "." + objectId;
-      offobj.Version = "1";
-      offobj.Barcode = barcode;
-      offobj.State = "active";
+      OfferObject offerObj = new OfferObject() {
+        ClassId = issuerId + "." + classId,
+        Id = issuerId + "." + objectId,
+        Version = "1",
+        Barcode = barcode,
+        State = "active"
+      };
 
-		  return offobj;
+      return offerObj;
 	  }
 
 	  public static OfferClass generateOfferClass(string issuerId, string classId)
 	  {
-		  IList<RenderSpec> renderSpec = new List<RenderSpec>();
+      // Define rendering templates per view
+      IList<RenderSpec> renderSpec = new List<RenderSpec>();
 
-		  RenderSpec listRenderSpec = new RenderSpec();
-      listRenderSpec.ViewName = "g_list";
-      listRenderSpec.TemplateFamily = "1.offer1_list";
+      RenderSpec listRenderSpec = new RenderSpec() {
+        ViewName = "g_list",
+        TemplateFamily = "1.offer1_list"
+      };
 
-		  RenderSpec expandedRenderSpec = new RenderSpec();
-      expandedRenderSpec.ViewName = "g_expanded";
-      expandedRenderSpec.TemplateFamily = "1.offer1_expanded";
+      RenderSpec expandedRenderSpec = new RenderSpec() {
+        ViewName = "g_expanded",
+        TemplateFamily = "1.offer1_expanded"
+      };
 
-		  renderSpec.Add(listRenderSpec);
-		  renderSpec.Add(expandedRenderSpec);
+      renderSpec.Add(listRenderSpec);
+      renderSpec.Add(expandedRenderSpec);
 
+      // Define Geofence locations
 		  IList<LatLongPoint> locations = new List<LatLongPoint>();
+      locations.Add(new LatLongPoint() { Latitude = 37.442087, Longitude = -122.161446 });
+      locations.Add(new LatLongPoint() { Latitude = 37.429379, Longitude = -122.122730 });
+      locations.Add(new LatLongPoint() { Latitude = 37.333646, Longitude = -121.884853 });
 
-      LatLongPoint llp1 = new LatLongPoint();
-      llp1.Latitude = 37.442087;
-      llp1.Longitude = -122.161446;
-
-      LatLongPoint llp2 = new LatLongPoint();
-      llp2.Latitude = 37.429379;
-      llp2.Longitude = -122.122730;
-
-      LatLongPoint llp3 = new LatLongPoint();
-      llp3.Latitude = 37.333646;
-      llp3.Longitude = -121.884853;
-
-		  locations.Add(llp1);
-      locations.Add(llp2); 
-      locations.Add(llp3);
-
-		  OfferClass wobClass = new OfferClass();
-      wobClass.Id = issuerId + "." + classId;
-      wobClass.Version = "1";
-      wobClass.IssuerName = "Baconrista Coffee";
-      wobClass.Title = "20% off one cup of coffee";
-      wobClass.Provider = "Baconrista Deals";
-      wobClass.Details = "20% off one cup of coffee at all Baconristas";
-
-      Uri homepageUri = new Uri();
-      homepageUri.UriValue = "http://baconrista.com/"; 
-      homepageUri.Description = "Website";
-      wobClass.HomepageUri = homepageUri;
-
-      Uri imageUri = new Uri();
-      imageUri.UriValue = "http://3.bp.blogspot.com/-AvC1agljv9Y/TirbDXOBIPI/AAAAAAAACK0/hR2gs5h2H6A/s1600/Bacon%2BWallpaper.png"; 
-      Image titleImage = new Image();
-      titleImage.SourceUri = imageUri;
-      wobClass.TitleImage = titleImage;
-
-      wobClass.RenderSpecs = renderSpec;
-      wobClass.RedemptionChannel = "both";
-      wobClass.ReviewStatus = "underReview";
-      wobClass.Locations = locations;
-      wobClass.AllowMultipleUsersPerObject = true;
+      // Create Offer class
+      OfferClass wobClass = new OfferClass() {
+        Id = issuerId + "." + classId,
+        Version = "1",
+        IssuerName = "Baconrista Coffee",
+        Title = "20% off one cup of coffee",
+        Provider = "Baconrista Deals",
+        Details = "20% off one cup of coffee at all Baconristas",
+        TitleImage = new Image() {
+          SourceUri = new Uri() {
+            UriValue = "http://3.bp.blogspot.com/-AvC1agljv9Y/TirbDXOBIPI/AAAAAAAACK0/hR2gs5h2H6A/s1600/Bacon%2BWallpaper.png"
+          }
+        },
+        RenderSpecs = renderSpec,
+        RedemptionChannel = "both",
+        ReviewStatus = "underReview",
+        Locations = locations,
+        AllowMultipleUsersPerObject = true
+      };
 		
       return wobClass;
 	  }

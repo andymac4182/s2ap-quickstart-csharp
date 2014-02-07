@@ -208,7 +208,7 @@ namespace WalletObjectsSample.Verticals
         IList<LatLongPoint> locations = new List<LatLongPoint>();
         locations.Add(new LatLongPoint() { Latitude = 37.422601, Longitude = -122.085286 });
 
-        // Create class
+        // Create Loyalty class
         LoyaltyClass wobClass = new LoyaltyClass() {
           Id = issuerId + "." + classId,
           Version = "1",
