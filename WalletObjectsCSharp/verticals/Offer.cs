@@ -20,10 +20,10 @@ using Google.Apis.Walletobjects.v1.Data;
 
 namespace WalletObjectsSample.Verticals
 {
-	public class Offer
-	{
-	  public static OfferObject generateOfferObject(string issuerId, string classId, string objectId)
-	  {
+  public class Offer
+  {
+    public static OfferObject generateOfferObject(string issuerId, string classId, string objectId)
+    {
       Barcode barcode = new Barcode() {
         Type = "upcA",
         Value = "123456789012",
@@ -31,7 +31,7 @@ namespace WalletObjectsSample.Verticals
         Label = "User Id"
       };
 
-		  // Define Wallet Object
+      // Define Wallet Object
       OfferObject offerObj = new OfferObject() {
         ClassId = issuerId + "." + classId,
         Id = issuerId + "." + objectId,
@@ -41,10 +41,10 @@ namespace WalletObjectsSample.Verticals
       };
 
       return offerObj;
-	  }
+    }
 
-	  public static OfferClass generateOfferClass(string issuerId, string classId)
-	  {
+    public static OfferClass generateOfferClass(string issuerId, string classId)
+    {
       // Define rendering templates per view
       IList<RenderSpec> renderSpec = new List<RenderSpec>();
 
@@ -62,7 +62,7 @@ namespace WalletObjectsSample.Verticals
       renderSpec.Add(expandedRenderSpec);
 
       // Define Geofence locations
-		  IList<LatLongPoint> locations = new List<LatLongPoint>();
+      IList<LatLongPoint> locations = new List<LatLongPoint>();
       locations.Add(new LatLongPoint() { Latitude = 37.442087, Longitude = -122.161446 });
       locations.Add(new LatLongPoint() { Latitude = 37.429379, Longitude = -122.122730 });
       locations.Add(new LatLongPoint() { Latitude = 37.333646, Longitude = -121.884853 });
@@ -86,8 +86,8 @@ namespace WalletObjectsSample.Verticals
         Locations = locations,
         AllowMultipleUsersPerObject = true
       };
-		
+    
       return wobClass;
-	  }
-	}
+    }
+  }
 }
