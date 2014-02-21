@@ -28,7 +28,7 @@ namespace WalletObjectsSample.Verticals
         Type = "upcA",
         Value = "123456789012",
         AlternateText = "12345",
-        Label = "User Id"
+        Label = "Offer Code"
       };
 
       // Define Wallet Object
@@ -50,22 +50,66 @@ namespace WalletObjectsSample.Verticals
 
       RenderSpec listRenderSpec = new RenderSpec() {
         ViewName = "g_list",
-        TemplateFamily = "1.offer1_list"
+        TemplateFamily = "1.offer_list"
       };
 
       RenderSpec expandedRenderSpec = new RenderSpec() {
         ViewName = "g_expanded",
-        TemplateFamily = "1.offer1_expanded"
+        TemplateFamily = "1.offer_expanded"
       };
 
       renderSpec.Add(listRenderSpec);
       renderSpec.Add(expandedRenderSpec);
 
+      // Define the Image Module Data
+      IList<ImageModuleData> imageModulesData = new List<ImageModuleData>();
+      ImageModuleData image = new ImageModuleData() {
+        MainImage = new Image() {
+          SourceUri = new Uri() {
+            UriValue = "http://farm4.staticflickr.com/3738/12440799783_3dc3c20606_b.jpg",
+            Description = "Coffee beans"
+          }
+        }
+      };
+      imageModulesData.Add(image);
+
+      // Define Links Module Data
+      IList<Uri> uris = new List<Uri>();
+      Uri uri1 = new Uri() {
+        Description = "Nearby Locations",
+        UriValue = "http://maps.google.com/maps?q=google"
+      };
+      Uri uri2 = new Uri() {
+        Description = "Call Customer Service",
+        UriValue = "tel:6505555555"
+      };
+      uris.Add(uri1);
+      uris.Add(uri2);
+
+      LinksModuleData linksModuleData = new LinksModuleData() {
+        Uris = uris
+      };
+
+      // Define Text Module Data
+      IList<TextModuleData> textModulesData = new List<TextModuleData>();
+      TextModuleData details = new TextModuleData() {
+        Header = "Details",
+        Body = "20% off one cup of coffee at all Baconrista Coffee locations.  " +
+        "Only one can be used per visit."
+      };
+      TextModuleData finePrint = new TextModuleData() {
+        Header = "About Baconrista",
+        Body = "Since 2013, Baconrista Coffee has been committed to making high quality bacon coffee.  " +
+        "Visit us in our stores or online at www.baconrista.com."
+      };
+      textModulesData.Add(details);
+      textModulesData.Add(finePrint);
+
       // Define Geofence locations
       IList<LatLongPoint> locations = new List<LatLongPoint>();
-      locations.Add(new LatLongPoint() { Latitude = 37.442087, Longitude = -122.161446 });
-      locations.Add(new LatLongPoint() { Latitude = 37.429379, Longitude = -122.122730 });
-      locations.Add(new LatLongPoint() { Latitude = 37.333646, Longitude = -121.884853 });
+      locations.Add(new LatLongPoint() { Latitude = 37.422601, Longitude = -122.085286 });
+      locations.Add(new LatLongPoint() { Latitude = 37.424354, Longitude = -122.09508869999999 });
+      locations.Add(new LatLongPoint() { Latitude = 40.7406578, Longitude = -74.00208940000002 });
 
       // Create Offer class
       OfferClass wobClass = new OfferClass() {
@@ -74,17 +118,19 @@ namespace WalletObjectsSample.Verticals
         IssuerName = "Baconrista Coffee",
         Title = "20% off one cup of coffee",
         Provider = "Baconrista Deals",
-        Details = "20% off one cup of coffee at all Baconristas",
         TitleImage = new Image() {
           SourceUri = new Uri() {
-            UriValue = "http://3.bp.blogspot.com/-AvC1agljv9Y/TirbDXOBIPI/AAAAAAAACK0/hR2gs5h2H6A/s1600/Bacon%2BWallpaper.png"
+            UriValue = "http://farm4.staticflickr.com/3723/11177041115_6e6a3b6f49_o.jpg"
           }
         },
         RenderSpecs = renderSpec,
         RedemptionChannel = "both",
         ReviewStatus = "underReview",
         Locations = locations,
-        AllowMultipleUsersPerObject = true
+        AllowMultipleUsersPerObject = true,
+        ImageModulesData = imageModulesData,
+        TextModulesData = textModulesData,
+        LinksModuleData = linksModuleData
       };
     
       return wobClass;

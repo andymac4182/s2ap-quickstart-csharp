@@ -53,7 +53,9 @@ namespace WalletObjectsSample.Verticals
       IList<TextModuleData> textModulesData = new List<TextModuleData>();
       TextModuleData textModuleData = new TextModuleData() {
         Header = "Jane's Baconrista Rewards",
-        Body = "You are 5 coffees away from receiving a free bacon fat latte"
+        Body = "Save more at your local Mountain View store Jane.  " + 
+        "You get 1 bacon fat latte for every 5 coffees purchased.  " +
+        "Also just for you, 10% off all pastries in the Mountain View store."
       };
       textModulesData.Add(textModuleData);          
           
@@ -71,33 +73,31 @@ namespace WalletObjectsSample.Verticals
           
       // Define Info Module
       IList<LabelValue> row0cols = new List<LabelValue>();
-      LabelValue row0col0 = new LabelValue() { Label = "Member Name", Value = "Jane Doe" };
-      LabelValue row0col1 = new LabelValue() { Label = "Membership #", Value = "1234567890" };          
+      LabelValue row0col0 = new LabelValue() { Label = "Next Reward in", Value = "2 coffees" };
+      LabelValue row0col1 = new LabelValue() { Label = "Member Since", Value = "01/15/2013" };          
       row0cols.Add(row0col0);
       row0cols.Add(row0col1);
 
       IList<LabelValue> row1cols = new List<LabelValue>();
-      LabelValue row1col0 = new LabelValue() { Label = "Next Reward in", Value = "2 coffees" };
-      LabelValue row1col1 = new LabelValue() { Label = "Member Since", Value = "01/15/2013" };          
+      LabelValue row1col0 = new LabelValue() { Label = "Local Store", Value = "Mountain View" };
       row1cols.Add(row1col0);
-      row1cols.Add(row1col1);
 
       IList<LabelValueRow> rows = new List<LabelValueRow>();
-      LabelValueRow row0 = new LabelValueRow() { 
-        HexBackgroundColor = "#BBCCFC",
-        HexFontColor = "#000000",
+      LabelValueRow row0 = new LabelValueRow() {
+        HexBackgroundColor = "#922635",
+        HexFontColor = "#F8EDC1",
         Columns = row0cols };
-      LabelValueRow row1 = new LabelValueRow() { 
-        HexBackgroundColor = "#FFFB00",
-        HexFontColor = "#EDEDDD",
+      LabelValueRow row1 = new LabelValueRow() {
+        HexBackgroundColor = "#922635",
+        HexFontColor = "#F8EDC1",
         Columns = row1cols };
 
       rows.Add(row0);
       rows.Add(row1);
 
       InfoModuleData infoModuleData = new InfoModuleData() {
-        HexFontColor = "#FFFFFF",
-        HexBackgroundColor = "#FC058C",
+        HexFontColor = "#F8EDC1",
+        HexBackgroundColor = "#442905",
         ShowLastUpdateTime = true,
         LabelValueRows = rows 
       };
@@ -105,7 +105,7 @@ namespace WalletObjectsSample.Verticals
       // Define general messages
       IList<WalletObjectMessage> messages = new List<WalletObjectMessage>();
       WalletObjectMessage message = new WalletObjectMessage() {
-        Header = "Jane, welcome to Banconrista Rewards!",
+        Header = "Hi Jane!",
         Body = "Thanks for joining our program. Show this message to " +
                 "our barista for your first free coffee on us!",
         Image = new Image() {
@@ -150,33 +150,50 @@ namespace WalletObjectsSample.Verticals
 
         RenderSpec listRenderSpec = new RenderSpec() {
           ViewName = "g_list",
-          TemplateFamily = "1.loyaltyCard1_list"
+          TemplateFamily = "1.loyalty_list"
         };
 
         RenderSpec expandedRenderSpec = new RenderSpec() {
           ViewName = "g_expanded",
-          TemplateFamily = "1.loyaltyCard1_expanded"
+          TemplateFamily = "1.loyalty_expanded"
         };
 
         renderSpec.Add(listRenderSpec);
         renderSpec.Add(expandedRenderSpec);
 
+        // Define the Image Module Data
+        IList<ImageModuleData> imageModulesData = new List<ImageModuleData>();
+        ImageModuleData image = new ImageModuleData() {
+          MainImage = new Image() {
+            SourceUri = new Uri() {
+              UriValue = "http://farm4.staticflickr.com/3738/12440799783_3dc3c20606_b.jpg",
+              Description = "Coffee beans"
+            }
+          }
+        };
+        imageModulesData.Add(image);
+
         // Define Text Module Data
         IList<TextModuleData> textModulesData = new List<TextModuleData>();
         TextModuleData textModuleData = new TextModuleData() {
           Header = "Rewards details",
-          Body = "Welcome to Baconrista rewards.  For every 5 coffees purchased " +
-                        "you'll receive a free bacon fat latte"
+          Body = "Welcome to Baconrista rewards.  Enjoy your rewards for being a loyal customer.  " +
+          "10 points for ever dollar spent.  Redeem your points for free coffee, bacon and more!"
         };
         textModulesData.Add(textModuleData);
 
         // Define Links Module Data
         IList<Uri> uris = new List<Uri>();
         Uri uri1 = new Uri() {
-          Description = "My Baconrista Account",
-          UriValue = "http://www.baconrista.com/myaccount?id=1234567890"
+          Description = "Nearby Locations",
+          UriValue = "http://maps.google.com/maps?q=google"
+        };
+        Uri uri2 = new Uri() {
+          Description = "Call Customer Service",
+          UriValue = "tel:6505555555"
         };
         uris.Add(uri1);
+        uris.Add(uri2);
 
         LinksModuleData linksModuleData = new LinksModuleData() {
           Uris = uris
@@ -184,11 +201,10 @@ namespace WalletObjectsSample.Verticals
 
         // Define Info Module
         InfoModuleData infoModuleData = new InfoModuleData() {
-          HexFontColor = "#FF3300",
-          HexBackgroundColor = "#ABABAB",
+          HexFontColor = "#F8EDC1",
+          HexBackgroundColor = "#442905",
           ShowLastUpdateTime = true
         };
-
 
         // Define general messages
         IList<WalletObjectMessage> messages = new List<WalletObjectMessage>();
@@ -207,6 +223,8 @@ namespace WalletObjectsSample.Verticals
         // Define Geofence locations
         IList<LatLongPoint> locations = new List<LatLongPoint>();
         locations.Add(new LatLongPoint() { Latitude = 37.422601, Longitude = -122.085286 });
+        locations.Add(new LatLongPoint() { Latitude = 37.424354, Longitude = -122.09508869999999 });
+        locations.Add(new LatLongPoint() { Latitude = 40.7406578, Longitude = -74.00208940000002 });
 
         // Create Loyalty class
         LoyaltyClass wobClass = new LoyaltyClass() {
@@ -228,6 +246,7 @@ namespace WalletObjectsSample.Verticals
           ReviewStatus = "underReview",
           AllowMultipleUsersPerObject = true,
           Locations = locations,
+          ImageModulesData = imageModulesData,
           InfoModuleData = infoModuleData,
           TextModulesData = textModulesData,
           LinksModuleData = linksModuleData
