@@ -122,7 +122,7 @@ namespace WalletObjectsSample.Verticals
       LoyaltyObject loyaltyObj = new LoyaltyObject() {          
         ClassId = issuerId + "." + classId,
         Id = issuerId + "." + objectId,
-        Version = "1",
+        Version = 1,
         State = "active",
         Barcode = barcode,
         AccountName = "Jane Doe",
@@ -229,7 +229,7 @@ namespace WalletObjectsSample.Verticals
         // Create Loyalty class
         LoyaltyClass wobClass = new LoyaltyClass() {
           Id = issuerId + "." + classId,
-          Version = "1",
+          Version = 1,
           IssuerName = "Baconrista",
           ProgramName = "Baconrista Rewards",
           ProgramLogo = new Image() {

@@ -35,7 +35,7 @@ namespace WalletObjectsSample.Verticals
       OfferObject offerObj = new OfferObject() {
         ClassId = issuerId + "." + classId,
         Id = issuerId + "." + objectId,
-        Version = "1",
+        Version = 1,
         Barcode = barcode,
         State = "active"
       };
@@ -114,7 +114,7 @@ namespace WalletObjectsSample.Verticals
       // Create Offer class
       OfferClass wobClass = new OfferClass() {
         Id = issuerId + "." + classId,
-        Version = "1",
+        Version = 1,
         IssuerName = "Baconrista Coffee",
         Title = "20% off one cup of coffee",
         Provider = "Baconrista Deals",
