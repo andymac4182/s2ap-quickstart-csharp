@@ -122,6 +122,7 @@ namespace WalletObjectsSample.Verticals
       LoyaltyObject loyaltyObj = new LoyaltyObject() {          
         ClassId = issuerId + "." + classId,
         Id = issuerId + "." + objectId,
+        Version = 1,
         State = "active",
         Barcode = barcode,
         AccountName = "Jane Doe",

@@ -35,6 +35,7 @@ namespace WalletObjectsSample.Verticals
       OfferObject offerObj = new OfferObject() {
         ClassId = issuerId + "." + classId,
         Id = issuerId + "." + objectId,
+        Version = 1,
         Barcode = barcode,
         State = "active"
       };
