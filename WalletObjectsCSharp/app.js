@@ -23,12 +23,14 @@ function init() {
 $.when($.get("jwt?type=loyalty", function(data){
     saveToWallet = document.createElement("g:savetowallet");
     saveToWallet.setAttribute("jwt", data);
+    saveToWallet.setAttribute("theme", "light");
     saveToWallet.setAttribute("onsuccess","successHandler");
     saveToWallet.setAttribute("onfailure","failureHandler");
     document.querySelector("#loyaltysave").appendChild(saveToWallet);}),
     $.get("jwt?type=offer", function(data){
     saveToWallet = document.createElement("g:savetowallet");
     saveToWallet.setAttribute("jwt", data);
+    saveToWallet.setAttribute("theme", "light");
     saveToWallet.setAttribute("onsuccess","successHandler");
     saveToWallet.setAttribute("onfailure","failureHandler");
     document.querySelector("#offersave").appendChild(saveToWallet);})).done(function(){
