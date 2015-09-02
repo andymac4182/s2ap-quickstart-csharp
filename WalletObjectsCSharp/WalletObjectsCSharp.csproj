@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="api\Google.Apis.Walletobjects.v1.cs" />
+    <Compile Include="verticals\GiftCard.cs" />
     <Compile Include="handlers\WobGenerateJwtHandler.ashx.cs">
       <DependentUpon>WobGenerateJwtHandler.ashx</DependentUpon>
     </Compile>
