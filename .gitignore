@@ -1,2 +1,6 @@
 .DS_Store
-
+.settings/
+obj/
+bin/
+packages
+.vs
