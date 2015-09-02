@@ -1,30 +1,37 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head>
+  <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Hello WoBs</title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
-    <script type="text/javascript" src="app.js"></script>
-</head>
+    <title>Hello Wallet Objects</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+  </head>
 
-<body>
+  <body>
     <h1>Hello Wallet Objects</h1>
-    <p>Step1:</p>
+    <ul id="errors" style="color: red;"></ul>
+
+    <p>Step 1:</p>
     <button id="loyalty">Insert Loyalty Class</button>
     <button id="offer"> Insert Offer Class</button>
-
+    <button id="giftcard">Insert Gift Card Class</button>
+    <div id="result"></div>
 
     <p>Step 2:</p>
     <div style="display:inline-block;">
-        <span>Save Loyalty:</span>
-        <br />
-        <div style="display:inline" id="loyaltysave"></div>
+      <span>Save Loyalty:</span>
+      <br />
+      <div style="display:inline" id="loyaltysave"></div>
     </div>
-
     <div style="display:inline-block;">
-        <span>Save Offer:</span>
-        <br />
-        <div style="display:inline" id="offersave"></div>
+      <span>Save Offer:</span>
+      <br />
+      <div style="display:inline" id="offersave"></div>
     </div>
-</body>
+    <div style="display:inline-block;">
+      <span>Save Gift Card:</span>
+      <br />
+      <div style="display:inline" id="giftcardsave"></div>
+    </div>
+  </body>
 </html>

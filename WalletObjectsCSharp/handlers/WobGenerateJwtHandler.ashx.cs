@@ -53,6 +53,8 @@ namespace WalletObjectsSample.Handlers
         string loyaltyObjectId = WebConfigurationManager.AppSettings["LoyaltyObjectId"];
         string offerClassId = WebConfigurationManager.AppSettings["OfferClassId"];
         string offerObjectId = WebConfigurationManager.AppSettings["OfferObjectId"];
+        string giftCardClassId = WebConfigurationManager.AppSettings["GiftCardClassId"];
+        string giftCardObjectId = WebConfigurationManager.AppSettings["GiftCardObjectId"];
 
         // OAuth - setup certificate based on private key file
         X509Certificate2 certificate = new X509Certificate2(
@@ -72,6 +74,10 @@ namespace WalletObjectsSample.Handlers
         else if (type.Equals("offer")) {
           OfferObject offerObject = Offer.generateOfferObject(credentials.IssuerId, offerClassId, offerObjectId);
           utils.addObject(offerObject);
+        } 
+        else if (type.Equals("giftcard")) {
+          GiftCardObject giftCardObject = GiftCard.generateGiftCardObject(credentials.IssuerId, giftCardClassId, giftCardObjectId);
+          utils.addObject(giftCardObject);
         }
 
         // generate the JWT
