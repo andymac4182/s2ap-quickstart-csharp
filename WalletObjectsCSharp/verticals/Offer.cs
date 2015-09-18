@@ -131,7 +131,7 @@ namespace WalletObjectsSample.Verticals
         TextModulesData = textModulesData,
         LinksModuleData = linksModuleData
       };
-    
+
       return wobClass;
     }
   }
