@@ -35,11 +35,10 @@ namespace WalletObjectsSample.Verticals
     public static LoyaltyObject generateLoyaltyObject(string issuerId, string classId, string objectId)
     {
       // Define Barcode
-      Barcode barcode = new Barcode() { 
+      Barcode barcode = new Barcode() {
         Type = "qrCode",
         Value = "28343E3",
-        AlternateText = "12345",
-        Label = "User Id"
+        AlternateText = "12345"
       };
 
       // Define Points
@@ -53,12 +52,12 @@ namespace WalletObjectsSample.Verticals
       IList<TextModuleData> textModulesData = new List<TextModuleData>();
       TextModuleData textModuleData = new TextModuleData() {
         Header = "Jane's Baconrista Rewards",
-        Body = "Save more at your local Mountain View store Jane.  " + 
+        Body = "Save more at your local Mountain View store Jane.  " +
         "You get 1 bacon fat latte for every 5 coffees purchased.  " +
         "Also just for you, 10% off all pastries in the Mountain View store."
       };
-      textModulesData.Add(textModuleData);          
-          
+      textModulesData.Add(textModuleData);
+
       // Define Links Module Data
       IList<Uri> uris = new List<Uri>();
       Uri uri1 = new Uri() {
@@ -70,11 +69,11 @@ namespace WalletObjectsSample.Verticals
       LinksModuleData linksModuleData = new LinksModuleData() {
         Uris = uris
       };
-          
+
       // Define Info Module
       IList<LabelValue> row0cols = new List<LabelValue>();
       LabelValue row0col0 = new LabelValue() { Label = "Next Reward in", Value = "2 coffees" };
-      LabelValue row0col1 = new LabelValue() { Label = "Member Since", Value = "01/15/2013" };          
+      LabelValue row0col1 = new LabelValue() { Label = "Member Since", Value = "01/15/2013" };
       row0cols.Add(row0col0);
       row0cols.Add(row0col1);
 
@@ -84,22 +83,18 @@ namespace WalletObjectsSample.Verticals
 
       IList<LabelValueRow> rows = new List<LabelValueRow>();
       LabelValueRow row0 = new LabelValueRow() {
-        HexBackgroundColor = "#922635",
-        HexFontColor = "#F8EDC1",
-        Columns = row0cols };
+        Columns = row0cols
+      };
       LabelValueRow row1 = new LabelValueRow() {
-        HexBackgroundColor = "#922635",
-        HexFontColor = "#F8EDC1",
-        Columns = row1cols };
+        Columns = row1cols
+      };
 
       rows.Add(row0);
       rows.Add(row1);
 
       InfoModuleData infoModuleData = new InfoModuleData() {
-        HexFontColor = "#F8EDC1",
-        HexBackgroundColor = "#442905",
         ShowLastUpdateTime = true,
-        LabelValueRows = rows 
+        LabelValueRows = rows
       };
 
       // Define general messages
@@ -108,18 +103,13 @@ namespace WalletObjectsSample.Verticals
         Header = "Hi Jane!",
         Body = "Thanks for joining our program. Show this message to " +
                 "our barista for your first free coffee on us!",
-        Image = new Image() {
-          SourceUri = new Uri() {
-            UriValue = "http://farm4.staticflickr.com/3723/11177041115_6e6a3b6f49_o.jpg"
-          }
-        },
         ActionUri = new Uri() { UriValue = "http://baconrista.com" }
       };
 
       messages.Add(message);
 
       // Define Wallet Instance
-      LoyaltyObject loyaltyObj = new LoyaltyObject() {          
+      LoyaltyObject loyaltyObj = new LoyaltyObject() {
         ClassId = issuerId + "." + classId,
         Id = issuerId + "." + objectId,
         Version = 1,
@@ -133,7 +123,7 @@ namespace WalletObjectsSample.Verticals
         TextModulesData = textModulesData,
         LinksModuleData = linksModuleData
       };
-          
+
       return loyaltyObj;
     }
 
@@ -250,7 +240,7 @@ namespace WalletObjectsSample.Verticals
           TextModulesData = textModulesData,
           LinksModuleData = linksModuleData
         };
-        
+
         return wobClass;
     }
   }

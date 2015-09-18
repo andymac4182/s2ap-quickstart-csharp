@@ -35,15 +35,13 @@ namespace WalletObjectsSample.Verticals
     public static GiftCardObject generateGiftCardObject(string issuerId, string classId, string objectId)
     {
       // Define Barcode
-      Barcode barcode = new Barcode() { 
+      Barcode barcode = new Barcode() {
         Type = "qrCode",
         Value = "28343E3",
-        AlternateText = "12345",
-        Label = "User Id"
+        AlternateText = "12345"
       };
 
-      Money balance = new Money
-      {
+      Money balance = new Money {
         CurrencyCode = "USD",
         Micros = 20000000L
       };
@@ -57,8 +55,8 @@ namespace WalletObjectsSample.Verticals
         Body = "Jane, don't forget to use your Baconrista Rewards when " +
             "paying with this gift card to earn additional points"
       };
-      textModulesData.Add(textModuleData);          
-          
+      textModulesData.Add(textModuleData);
+
       // Define Links Module Data
       IList<Uri> uris = new List<Uri>();
       Uri uri1 = new Uri() {
@@ -72,7 +70,7 @@ namespace WalletObjectsSample.Verticals
       };
 
       // Define Wallet Instance
-      GiftCardObject GiftCardObj = new GiftCardObject() {          
+      GiftCardObject GiftCardObj = new GiftCardObject() {
         ClassId = issuerId + "." + classId,
         Id = issuerId + "." + objectId,
         State = "active",
@@ -85,7 +83,7 @@ namespace WalletObjectsSample.Verticals
         CardNumber = "123jkl4889",
         Pin = "1111"
       };
-          
+
       return GiftCardObj;
     }
 
@@ -137,8 +135,6 @@ namespace WalletObjectsSample.Verticals
 
         // Define Info Module
         InfoModuleData infoModuleData = new InfoModuleData() {
-          HexFontColor = "#F8EDC1",
-          HexBackgroundColor = "#442905",
           ShowLastUpdateTime = true
         };
 
@@ -164,7 +160,7 @@ namespace WalletObjectsSample.Verticals
           ReviewStatus = "underReview",
           Locations = locations
         };
-        
+
         return wobClass;
     }
   }
