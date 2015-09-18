@@ -137,6 +137,9 @@ namespace WalletObjectsSample.Utils
                 [Newtonsoft.Json.JsonPropertyAttribute("offerObjects")]
                 public IList<OfferObject> offerObjects { get; set; }
 
+                [Newtonsoft.Json.JsonPropertyAttribute("giftCardObjects")]
+                public IList<GiftCardObject> giftCardObjects { get; set; }
+
                 [Newtonsoft.Json.JsonPropertyAttribute("webserviceResponse")]
                 public WebserviceResponse webserviceResponse { get; set; }
             }

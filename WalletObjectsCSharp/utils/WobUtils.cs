@@ -39,6 +39,7 @@ namespace WalletObjectsSample.Utils
     String [] origins;
     IList<LoyaltyObject> loyaltyObjects = new List<LoyaltyObject>();
     IList<OfferObject> offerObjects = new List<OfferObject>();
+    IList<GiftCardObject> giftCardObjects = new List<GiftCardObject>();
     RSACryptoServiceProvider key;
 
     public WobUtils(String iss, X509Certificate2 cert)
@@ -59,6 +60,11 @@ namespace WalletObjectsSample.Utils
     public void addObject(OfferObject obj)
     {
         offerObjects.Add(obj);
+    }
+        
+    public void addObject(GiftCardObject obj)
+    {
+        giftCardObjects.Add(obj);
     }        
 
     private string CreateSerializedHeader()
@@ -84,7 +90,8 @@ namespace WalletObjectsSample.Utils
         Objects = new JsonWebToken.Payload.Content()
         {
           loyaltyObjects = loyaltyObjects,
-          offerObjects = offerObjects
+          offerObjects = offerObjects,
+          giftCardObjects = giftCardObjects
         },
         Origins = origins
         //Origins  = new []{"http://localhost:59113"}

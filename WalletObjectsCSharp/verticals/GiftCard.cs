@@ -44,7 +44,7 @@ namespace WalletObjectsSample.Verticals
       Money balance = new Money {
         CurrencyCode = "USD",
         Micros = 20000000L
-      }
+      };
 
       // TODO(samstern): balanceUpdateTime
 
@@ -124,7 +124,7 @@ namespace WalletObjectsSample.Verticals
         // Define Links Module Data
         IList<Uri> uris = new List<Uri>();
         Uri uri1 = new Uri() {
-          Description = "Baconrista"
+          Description = "Baconrista",
           UriValue = "http://www.baconrista.com/"
         };
         uris.Add(uri1);
