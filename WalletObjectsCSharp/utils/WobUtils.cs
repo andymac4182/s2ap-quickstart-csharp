@@ -85,7 +85,7 @@ namespace WalletObjectsSample.Utils
       {
         Issuer = issuer,
         Audience = "google",
-        Type = "savetowallet",
+        Type = "savetoandroidpay",
         IssuedAtTimeSeconds = iat,
         Objects = new JsonWebToken.Payload.Content()
         {
