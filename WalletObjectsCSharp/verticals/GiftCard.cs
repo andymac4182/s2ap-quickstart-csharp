@@ -95,22 +95,6 @@ namespace WalletObjectsSample.Verticals
     /// <returns> GiftCardClass </returns>
     public static GiftCardClass generateGiftCardClass(string issuerId, string classId)
     {
-        // Define rendering templates per view
-        IList<RenderSpec> renderSpec = new List<RenderSpec>();
-
-        RenderSpec listRenderSpec = new RenderSpec() {
-          ViewName = "g_list",
-          TemplateFamily = "1.giftCard1_list"
-        };
-
-        RenderSpec expandedRenderSpec = new RenderSpec() {
-          ViewName = "g_expanded",
-          TemplateFamily = "1.giftCard1_expanded"
-        };
-
-        renderSpec.Add(listRenderSpec);
-        renderSpec.Add(expandedRenderSpec);
-
         // Define Text Module Data
         IList<TextModuleData> textModulesData = new List<TextModuleData>();
         TextModuleData textModuleData = new TextModuleData() {
@@ -156,7 +140,6 @@ namespace WalletObjectsSample.Verticals
           },
           TextModulesData = textModulesData,
           LinksModuleData = linksModuleData,
-          RenderSpecs = renderSpec,
           ReviewStatus = "underReview",
           Locations = locations
         };
