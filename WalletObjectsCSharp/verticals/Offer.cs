@@ -45,22 +45,6 @@ namespace WalletObjectsSample.Verticals
 
     public static OfferClass generateOfferClass(string issuerId, string classId)
     {
-      // Define rendering templates per view
-      IList<RenderSpec> renderSpec = new List<RenderSpec>();
-
-      RenderSpec listRenderSpec = new RenderSpec() {
-        ViewName = "g_list",
-        TemplateFamily = "1.offer_list"
-      };
-
-      RenderSpec expandedRenderSpec = new RenderSpec() {
-        ViewName = "g_expanded",
-        TemplateFamily = "1.offer_expanded"
-      };
-
-      renderSpec.Add(listRenderSpec);
-      renderSpec.Add(expandedRenderSpec);
-
       // Define the Image Module Data
       IList<ImageModuleData> imageModulesData = new List<ImageModuleData>();
       ImageModuleData image = new ImageModuleData() {
@@ -122,7 +106,6 @@ namespace WalletObjectsSample.Verticals
             UriValue = "http://farm4.staticflickr.com/3723/11177041115_6e6a3b6f49_o.jpg"
           }
         },
-        RenderSpecs = renderSpec,
         RedemptionChannel = "both",
         ReviewStatus = "underReview",
         Locations = locations,

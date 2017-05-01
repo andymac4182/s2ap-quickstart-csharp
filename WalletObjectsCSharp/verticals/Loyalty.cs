@@ -135,22 +135,6 @@ namespace WalletObjectsSample.Verticals
     /// <returns> loyaltyClass </returns>
     public static LoyaltyClass generateLoyaltyClass(string issuerId, string classId)
     {
-        // Define rendering templates per view
-        IList<RenderSpec> renderSpec = new List<RenderSpec>();
-
-        RenderSpec listRenderSpec = new RenderSpec() {
-          ViewName = "g_list",
-          TemplateFamily = "1.loyalty_list"
-        };
-
-        RenderSpec expandedRenderSpec = new RenderSpec() {
-          ViewName = "g_expanded",
-          TemplateFamily = "1.loyalty_expanded"
-        };
-
-        renderSpec.Add(listRenderSpec);
-        renderSpec.Add(expandedRenderSpec);
-
         // Define the Image Module Data
         IList<ImageModuleData> imageModulesData = new List<ImageModuleData>();
         ImageModuleData image = new ImageModuleData() {
@@ -230,7 +214,6 @@ namespace WalletObjectsSample.Verticals
           RewardsTier = "Gold",
           AccountNameLabel = "Member Name",
           AccountIdLabel = "Member Id",
-          RenderSpecs = renderSpec,
           Messages = messages,
           ReviewStatus = "underReview",
           AllowMultipleUsersPerObject = true,
