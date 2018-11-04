@@ -25,8 +25,8 @@ using Google.Apis.Services;
 
 using Google.Apis.Walletobjects.v1;
 using Google.Apis.Walletobjects.v1.Data;
-using WalletObjectsSample.Utils;
-using WalletObjectsSample.Verticals;
+using GooglePay.WalletObjects.utils;
+using GooglePay.WalletObjects.verticals;
 
 namespace WalletObjectsSample.Handlers
 {
@@ -58,26 +58,26 @@ namespace WalletObjectsSample.Handlers
 
         // OAuth - setup certificate based on private key file
         X509Certificate2 certificate = new X509Certificate2(
-          AppDomain.CurrentDomain.BaseDirectory + credentials.serviceAccountPrivateKey,
+          AppDomain.CurrentDomain.BaseDirectory + credentials.ServiceAccountPrivateKey,
           "notasecret",
           X509KeyStorageFlags.Exportable);
 
-        WobUtils utils = new WobUtils(credentials.serviceAccountId, certificate);
+        WobUtils utils = new WobUtils(credentials.ServiceAccountId, certificate, WebConfigurationManager.AppSettings["Origins"].Split(' '));
 
         // get the object type
         string type = request.Params["type"];
 
         if (type.Equals("loyalty")) {
-          LoyaltyObject loyaltyObject = Loyalty.generateLoyaltyObject(credentials.IssuerId, loyaltyClassId, loyaltyObjectId);
-          utils.addObject(loyaltyObject);
+          LoyaltyObject loyaltyObject = Loyalty.GenerateLoyaltyObject(credentials.IssuerId, loyaltyClassId, loyaltyObjectId);
+          utils.AddObject(loyaltyObject);
         }
         else if (type.Equals("offer")) {
-          OfferObject offerObject = Offer.generateOfferObject(credentials.IssuerId, offerClassId, offerObjectId);
-          utils.addObject(offerObject);
+          OfferObject offerObject = Offer.GenerateOfferObject(credentials.IssuerId, offerClassId, offerObjectId);
+          utils.AddObject(offerObject);
         } 
         else if (type.Equals("giftcard")) {
-          GiftCardObject giftCardObject = GiftCard.generateGiftCardObject(credentials.IssuerId, giftCardClassId, giftCardObjectId);
-          utils.addObject(giftCardObject);
+          GiftCardObject giftCardObject = GiftCard.GenerateGiftCardObject(credentials.IssuerId, giftCardClassId, giftCardObjectId);
+          utils.AddObject(giftCardObject);
         }
 
         // generate the JWT

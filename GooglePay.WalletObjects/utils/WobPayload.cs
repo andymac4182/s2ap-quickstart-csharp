@@ -17,7 +17,7 @@ limitations under the License.
 using System.Collections.Generic;
 using Google.Apis.Walletobjects.v1.Data;
 
-namespace WalletObjectsSample.Utils
+namespace GooglePay.WalletObjects.utils
 {
     /// <summary>
     /// JSON Web Token (JWT) implementation as specified in 
@@ -132,16 +132,16 @@ namespace WalletObjectsSample.Utils
             public class Content
             {
                 [Newtonsoft.Json.JsonPropertyAttribute("loyaltyObjects")]
-                public IList<LoyaltyObject> loyaltyObjects { get; set; }
+                public IList<LoyaltyObject> LoyaltyObjects { get; set; }
 
                 [Newtonsoft.Json.JsonPropertyAttribute("offerObjects")]
-                public IList<OfferObject> offerObjects { get; set; }
+                public IList<OfferObject> OfferObjects { get; set; }
 
                 [Newtonsoft.Json.JsonPropertyAttribute("giftCardObjects")]
-                public IList<GiftCardObject> giftCardObjects { get; set; }
+                public IList<GiftCardObject> GiftCardObjects { get; set; }
 
                 [Newtonsoft.Json.JsonPropertyAttribute("webserviceResponse")]
-                public WebserviceResponse webserviceResponse { get; set; }
+                public WebserviceResponse WebserviceResponse { get; set; }
             }
 
             public class WebserviceResponse

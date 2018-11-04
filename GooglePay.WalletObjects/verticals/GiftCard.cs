@@ -15,13 +15,9 @@ limitations under the License.
 */
 
 using System.Collections.Generic;
-using Google.Apis.Walletobjects.v1;
 using Google.Apis.Walletobjects.v1.Data;
 
-using Newtonsoft.Json;
-using System.Runtime.Serialization.Formatters;
-
-namespace WalletObjectsSample.Verticals
+namespace GooglePay.WalletObjects.verticals
 {
   public class GiftCard
   {
@@ -32,7 +28,7 @@ namespace WalletObjectsSample.Verticals
     /// <param name="classId"> </param>
     /// <param name="objectId"> </param>
     /// <returns> GiftCardObject </returns>
-    public static GiftCardObject generateGiftCardObject(string issuerId, string classId, string objectId)
+    public static GiftCardObject GenerateGiftCardObject(string issuerId, string classId, string objectId)
     {
       // Define Barcode
       Barcode barcode = new Barcode() {
@@ -70,7 +66,7 @@ namespace WalletObjectsSample.Verticals
       };
 
       // Define Wallet Instance
-      GiftCardObject GiftCardObj = new GiftCardObject() {
+      GiftCardObject giftCardObj = new GiftCardObject() {
         ClassId = issuerId + "." + classId,
         Id = issuerId + "." + objectId,
         State = "active",
@@ -84,7 +80,7 @@ namespace WalletObjectsSample.Verticals
         Pin = "1111"
       };
 
-      return GiftCardObj;
+      return giftCardObj;
     }
 
     /// <summary>
@@ -93,7 +89,7 @@ namespace WalletObjectsSample.Verticals
     /// <param name="issuerId"> </param>
     /// <param name="classId"> </param>
     /// <returns> GiftCardClass </returns>
-    public static GiftCardClass generateGiftCardClass(string issuerId, string classId)
+    public static GiftCardClass GenerateGiftCardClass(string issuerId, string classId)
     {
         // Define Text Module Data
         IList<TextModuleData> textModulesData = new List<TextModuleData>();

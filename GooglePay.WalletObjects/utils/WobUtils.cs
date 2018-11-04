@@ -16,55 +16,44 @@ limitations under the License.
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Configuration;
-using System.Text;
-
-using Google.Apis.Json;
-using Google.Apis.Util;
-using Google.Apis.Http;
-using Google.Apis.Auth;
-using Google.Apis.Auth.OAuth2.Requests;
-using Google.Apis.Auth.OAuth2.Responses;
-using Google.Apis.Walletobjects.v1.Data;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using Google.Apis.Auth;
+using Google.Apis.Json;
+using Google.Apis.Walletobjects.v1.Data;
 
-namespace WalletObjectsSample.Utils
+namespace GooglePay.WalletObjects.utils
 {
   public class WobUtils
   {
-    String issuer;
-    String [] origins;
-    IList<LoyaltyObject> loyaltyObjects = new List<LoyaltyObject>();
-    IList<OfferObject> offerObjects = new List<OfferObject>();
-    IList<GiftCardObject> giftCardObjects = new List<GiftCardObject>();
-    RSACryptoServiceProvider key;
+      readonly string _issuer;
+      readonly string[] _origins;
+      readonly IList<LoyaltyObject> _loyaltyObjects = new List<LoyaltyObject>();
+      readonly IList<OfferObject> _offerObjects = new List<OfferObject>();
+      readonly IList<GiftCardObject> _giftCardObjects = new List<GiftCardObject>();
+      readonly RSA _key;
 
-    public WobUtils(String iss, X509Certificate2 cert)
+      public WobUtils(string iss, X509Certificate2 cert, string[] origins)
+      {
+          _issuer = iss;
+          this._origins = origins;
+          _key = cert.GetRSAPrivateKey();
+      }
+
+      public void AddObject(LoyaltyObject obj)
     {
-      issuer = iss;
-      origins = WebConfigurationManager.AppSettings["Origins"].Split(' ');
-      RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)cert.PrivateKey;
-      byte[] privateKeyBlob = rsa.ExportCspBlob(true);
-      key = new RSACryptoServiceProvider();
-      key.ImportCspBlob(privateKeyBlob);
+        _loyaltyObjects.Add(obj);
     }
 
-    public void addObject(LoyaltyObject obj)
+    public void AddObject(OfferObject obj)
     {
-        loyaltyObjects.Add(obj);
-    }
-
-    public void addObject(OfferObject obj)
-    {
-        offerObjects.Add(obj);
+        _offerObjects.Add(obj);
     }
         
-    public void addObject(GiftCardObject obj)
+    public void AddObject(GiftCardObject obj)
     {
-        giftCardObjects.Add(obj);
+        _giftCardObjects.Add(obj);
     }        
 
     private string CreateSerializedHeader()
@@ -83,63 +72,63 @@ namespace WalletObjectsSample.Utils
       var iat = (int)(System.DateTime.UtcNow - new System.DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
       var jwtContainer = new JsonWebToken.Payload()
       {
-        Issuer = issuer,
+        Issuer = _issuer,
         Audience = "google",
         Type = "savetoandroidpay",
         IssuedAtTimeSeconds = iat,
         Objects = new JsonWebToken.Payload.Content()
         {
-          loyaltyObjects = loyaltyObjects,
-          offerObjects = offerObjects,
-          giftCardObjects = giftCardObjects
+          LoyaltyObjects = _loyaltyObjects,
+          OfferObjects = _offerObjects,
+          GiftCardObjects = _giftCardObjects
         },
-        Origins = origins
+        Origins = _origins
         //Origins  = new []{"http://localhost:59113"}
       };
 
       return NewtonsoftJsonSerializer.Instance.Serialize(jwtContainer);
     }
 
-    private string CreateWSPayload(JsonWebToken.Payload.WebserviceResponse response)
+    private string CreateWsPayload(JsonWebToken.Payload.WebserviceResponse response)
     {
       var iat = (int)(System.DateTime.UtcNow - new System.DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
       var jwtContainer = new JsonWebToken.Payload()
       {
-        Issuer = issuer,
+        Issuer = _issuer,
         Audience = "google",
         Type = "loyaltywebservice",
         IssuedAtTimeSeconds = iat,
         Objects = new JsonWebToken.Payload.Content()
         {
-          loyaltyObjects = loyaltyObjects,
-          offerObjects = offerObjects,
-          webserviceResponse = response
+          LoyaltyObjects = _loyaltyObjects,
+          OfferObjects = _offerObjects,
+          WebserviceResponse = response
         },
       };
 
       return NewtonsoftJsonSerializer.Instance.Serialize(jwtContainer);
     }
 
-    public String GenerateJwt()
+    public string GenerateJwt()
     {
-        String header = UrlSafeBase64Encode(CreateSerializedHeader());
-        String body = UrlSafeBase64Encode(CreateSerializedPayload());
-        String content = header + "." + body;
-        String signature = CreateSignature(content);
+        string header = UrlSafeBase64Encode(CreateSerializedHeader());
+        string body = UrlSafeBase64Encode(CreateSerializedPayload());
+        string content = header + "." + body;
+        string signature = CreateSignature(content);
         return content + "." + signature;
     }
 
-    public String GenerateWsJwt(JsonWebToken.Payload.WebserviceResponse response)
+    public string GenerateWsJwt(JsonWebToken.Payload.WebserviceResponse response)
     {
-        String header = UrlSafeBase64Encode(CreateSerializedHeader());
-        String body = UrlSafeBase64Encode(CreateWSPayload(response));
-        String content = header + "." + body;
-        String signature = CreateSignature(content);
+        string header = UrlSafeBase64Encode(CreateSerializedHeader());
+        string body = UrlSafeBase64Encode(CreateWsPayload(response));
+        string content = header + "." + body;
+        string signature = CreateSignature(content);
         return content + "." + signature;
     }
-    private String CreateSignature(String content)
+    private string CreateSignature(string content)
     {
-        return UrlSafeBase64Encode(key.SignData(Encoding.UTF8.GetBytes(content), "SHA256"));
+        return UrlSafeBase64Encode(_key.SignData(Encoding.UTF8.GetBytes(content), HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1));
     }
 
     /// <summary>Encodes the provided UTF8 string into an URL safe base64 string.</summary>
@@ -155,7 +144,7 @@ namespace WalletObjectsSample.Utils
     /// <returns>The URL safe base64 string</returns>
     private string UrlSafeBase64Encode(byte[] bytes)
     {
-        return Convert.ToBase64String(bytes).Replace("=", String.Empty).Replace('+', '-').Replace('/', '_');
+        return Convert.ToBase64String(bytes).Replace("=", string.Empty).Replace('+', '-').Replace('/', '_');
     }
   }
 }

@@ -24,8 +24,8 @@ using Google.Apis.Services;
 
 using Google.Apis.Walletobjects.v1;
 using Google.Apis.Walletobjects.v1.Data;
-using WalletObjectsSample.Utils;
-using WalletObjectsSample.Verticals;
+using GooglePay.WalletObjects.utils;
+using GooglePay.WalletObjects.verticals;
 
 namespace WalletObjectsSample.Handlers
 {
@@ -55,13 +55,13 @@ namespace WalletObjectsSample.Handlers
 
         // OAuth - setup certificate based on private key file
         X509Certificate2 certificate = new X509Certificate2(
-          AppDomain.CurrentDomain.BaseDirectory + credentials.serviceAccountPrivateKey,
+          AppDomain.CurrentDomain.BaseDirectory + credentials.ServiceAccountPrivateKey,
           "notasecret",
           X509KeyStorageFlags.Exportable);
 
         // create service account credential
         ServiceAccountCredential credential = new ServiceAccountCredential(
-        new ServiceAccountCredential.Initializer(credentials.serviceAccountId)
+        new ServiceAccountCredential.Initializer(credentials.ServiceAccountId)
         {
           Scopes = new[] { "https://www.googleapis.com/auth/wallet_object.issuer" }
         }.FromCertificate(certificate));
@@ -79,12 +79,12 @@ namespace WalletObjectsSample.Handlers
         // insert the class
         if (type.Equals("loyalty"))
         {
-          LoyaltyClass loyaltyClass = Loyalty.generateLoyaltyClass(credentials.IssuerId, loyaltyClassId);
+          LoyaltyClass loyaltyClass = Loyalty.GenerateLoyaltyClass(credentials.IssuerId, loyaltyClassId);
           woService.Loyaltyclass.Insert(loyaltyClass).Execute();
         }
         else if (type.Equals("offer"))
         {
-          OfferClass offerClass = Offer.generateOfferClass(credentials.IssuerId, offerClassId);
+          OfferClass offerClass = Offer.GenerateOfferClass(credentials.IssuerId, offerClassId);
           woService.Offerclass.Insert(offerClass).Execute();
         }
       }

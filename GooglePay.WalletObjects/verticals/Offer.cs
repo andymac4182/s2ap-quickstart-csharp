@@ -15,14 +15,13 @@ limitations under the License.
 */
 
 using System.Collections.Generic;
-using Google.Apis.Walletobjects.v1;
 using Google.Apis.Walletobjects.v1.Data;
 
-namespace WalletObjectsSample.Verticals
+namespace GooglePay.WalletObjects.verticals
 {
   public class Offer
   {
-    public static OfferObject generateOfferObject(string issuerId, string classId, string objectId)
+    public static OfferObject GenerateOfferObject(string issuerId, string classId, string objectId)
     {
       Barcode barcode = new Barcode() {
         Type = "upcA",
@@ -43,7 +42,7 @@ namespace WalletObjectsSample.Verticals
       return offerObj;
     }
 
-    public static OfferClass generateOfferClass(string issuerId, string classId)
+    public static OfferClass GenerateOfferClass(string issuerId, string classId)
     {
       // Define the Image Module Data
       IList<ImageModuleData> imageModulesData = new List<ImageModuleData>();

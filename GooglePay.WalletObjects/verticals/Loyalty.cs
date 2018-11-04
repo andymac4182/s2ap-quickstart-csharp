@@ -15,13 +15,9 @@ limitations under the License.
 */
 
 using System.Collections.Generic;
-using Google.Apis.Walletobjects.v1;
 using Google.Apis.Walletobjects.v1.Data;
 
-using Newtonsoft.Json;
-using System.Runtime.Serialization.Formatters;
-
-namespace WalletObjectsSample.Verticals
+namespace GooglePay.WalletObjects.verticals
 {
   public class Loyalty
   {
@@ -32,7 +28,7 @@ namespace WalletObjectsSample.Verticals
     /// <param name="classId"> </param>
     /// <param name="objectId"> </param>
     /// <returns> loyaltyObject </returns>
-    public static LoyaltyObject generateLoyaltyObject(string issuerId, string classId, string objectId)
+    public static LoyaltyObject GenerateLoyaltyObject(string issuerId, string classId, string objectId)
     {
       // Define Barcode
       Barcode barcode = new Barcode() {
@@ -71,22 +67,22 @@ namespace WalletObjectsSample.Verticals
       };
 
       // Define Info Module
-      IList<LabelValue> row0cols = new List<LabelValue>();
-      LabelValue row0col0 = new LabelValue() { Label = "Next Reward in", Value = "2 coffees" };
-      LabelValue row0col1 = new LabelValue() { Label = "Member Since", Value = "01/15/2013" };
-      row0cols.Add(row0col0);
-      row0cols.Add(row0col1);
+      IList<LabelValue> row0Cols = new List<LabelValue>();
+      LabelValue row0Col0 = new LabelValue() { Label = "Next Reward in", Value = "2 coffees" };
+      LabelValue row0Col1 = new LabelValue() { Label = "Member Since", Value = "01/15/2013" };
+      row0Cols.Add(row0Col0);
+      row0Cols.Add(row0Col1);
 
-      IList<LabelValue> row1cols = new List<LabelValue>();
-      LabelValue row1col0 = new LabelValue() { Label = "Local Store", Value = "Mountain View" };
-      row1cols.Add(row1col0);
+      IList<LabelValue> row1Cols = new List<LabelValue>();
+      LabelValue row1Col0 = new LabelValue() { Label = "Local Store", Value = "Mountain View" };
+      row1Cols.Add(row1Col0);
 
       IList<LabelValueRow> rows = new List<LabelValueRow>();
       LabelValueRow row0 = new LabelValueRow() {
-        Columns = row0cols
+        Columns = row0Cols
       };
       LabelValueRow row1 = new LabelValueRow() {
-        Columns = row1cols
+        Columns = row1Cols
       };
 
       rows.Add(row0);
@@ -133,7 +129,7 @@ namespace WalletObjectsSample.Verticals
     /// <param name="issuerId"> </param>
     /// <param name="classId"> </param>
     /// <returns> loyaltyClass </returns>
-    public static LoyaltyClass generateLoyaltyClass(string issuerId, string classId)
+    public static LoyaltyClass GenerateLoyaltyClass(string issuerId, string classId)
     {
         // Define the Image Module Data
         IList<ImageModuleData> imageModulesData = new List<ImageModuleData>();

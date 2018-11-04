@@ -27,8 +27,8 @@ using Google.Apis.Services;
 
 using Google.Apis.Walletobjects.v1;
 using Google.Apis.Walletobjects.v1.Data;
-using WalletObjectsSample.Utils;
-using WalletObjectsSample.Verticals;
+using GooglePay.WalletObjects.utils;
+using GooglePay.WalletObjects.verticals;
 using WalletObjectsSample.Webservice;
 
 namespace WalletObjectsSample.Handlers
@@ -53,7 +53,7 @@ namespace WalletObjectsSample.Handlers
 
         // OAuth - setup certificate based on private key file
         X509Certificate2 certificate = new X509Certificate2(
-          AppDomain.CurrentDomain.BaseDirectory + credentials.serviceAccountPrivateKey,
+          AppDomain.CurrentDomain.BaseDirectory + credentials.ServiceAccountPrivateKey,
           "notasecret",
           X509KeyStorageFlags.Exportable);
 
@@ -85,11 +85,11 @@ namespace WalletObjectsSample.Handlers
           };
         }
 
-        utils = new WobUtils(credentials.IssuerId, certificate);
+        utils = new WobUtils(credentials.IssuerId, certificate, WebConfigurationManager.AppSettings["Origins"].Split(' '));
 
         string linkId = webRequest.Params.LinkingId;
-        LoyaltyObject loyaltyObject = Loyalty.generateLoyaltyObject(credentials.IssuerId, "LoyaltyClass", (linkId != null) ? linkId : "LoyaltyObject");
-        utils.addObject(loyaltyObject);
+        LoyaltyObject loyaltyObject = Loyalty.GenerateLoyaltyObject(credentials.IssuerId, "LoyaltyClass", (linkId != null) ? linkId : "LoyaltyObject");
+        utils.AddObject(loyaltyObject);
 
         jwt = utils.GenerateWsJwt(webResponse);
 

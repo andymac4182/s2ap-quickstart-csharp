@@ -1,7 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletObjectsCSharp", "WalletObjectsCSharp\WalletObjectsCSharp.csproj", "{9721DDFF-98D6-4CFB-B3FE-2E1DB79433C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GooglePay.WalletObjects", "GooglePay.WalletObjects\GooglePay.WalletObjects.csproj", "{6D60E2DC-C480-4B67-BFDF-73A62054D158}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GooglePay.SaveToGooglePay", "GooglePay.SaveToGooglePay\GooglePay.SaveToGooglePay.csproj", "{330D8028-B5D5-4FF8-AA34-3E0087472956}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +19,19 @@ Global
 		{9721DDFF-98D6-4CFB-B3FE-2E1DB79433C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9721DDFF-98D6-4CFB-B3FE-2E1DB79433C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9721DDFF-98D6-4CFB-B3FE-2E1DB79433C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D60E2DC-C480-4B67-BFDF-73A62054D158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D60E2DC-C480-4B67-BFDF-73A62054D158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D60E2DC-C480-4B67-BFDF-73A62054D158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D60E2DC-C480-4B67-BFDF-73A62054D158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{330D8028-B5D5-4FF8-AA34-3E0087472956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330D8028-B5D5-4FF8-AA34-3E0087472956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330D8028-B5D5-4FF8-AA34-3E0087472956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330D8028-B5D5-4FF8-AA34-3E0087472956}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C49FD6F1-BAE3-454C-8572-9012197B0578}
 	EndGlobalSection
 EndGlobal

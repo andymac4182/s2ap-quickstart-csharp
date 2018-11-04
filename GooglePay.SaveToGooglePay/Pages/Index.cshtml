@@ -1,0 +1,109 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+    <h1>Hello Wallet Objects</h1>
+    <ul id="errors" style="color: red;"></ul>
+
+    <p>Step 1:</p>
+    <button id="loyalty">Insert Loyalty Class</button>
+    <button id="offer"> Insert Offer Class</button>
+    <button id="giftcard">Insert Gift Card Class</button>
+    <div id="result"></div>
+
+    <p>Step 2:</p>
+    <div style="display:inline-block;">
+        <span>Save Loyalty:</span>
+        <br />
+        <div style="display:inline" id="loyaltysave"></div>
+    </div>
+    <div style="display:inline-block;">
+        <span>Save Offer:</span>
+        <br />
+        <div style="display:inline" id="offersave"></div>
+    </div>
+    <div style="display:inline-block;">
+        <span>Save Gift Card:</span>
+        <br />
+        <div style="display:inline" id="giftcardsave"></div>
+    </div>
+
+@section Scripts
+{
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+    <script>
+        /**
+ * Save to Wallet success handler
+ */
+        var successHandler = function (params) {
+            console.log("Object added successfully", params);
+        }
+
+        /**
+         * Save to Wallet failure handler
+         */
+        var failureHandler = function (params) {
+            console.log("Object insertion failed", params);
+            var errorLi = $('<li>').text('Error: ' + JSON.stringify(params));
+            $('#errors').append(errorLi);
+        }
+
+        /**
+         * Initialization function
+         */
+        function init() {
+            document.getElementById("loyalty").addEventListener("click", function () {
+                $.get("insert?type=loyalty", function (data) {
+                    console.log("Loyalty", data);
+                })
+            });
+            document.getElementById("offer").addEventListener("click", function () {
+                $.get("insert?type=offer", function (data) {
+                    console.log("Offer", data);
+                })
+            });
+            document.getElementById("giftcard").addEventListener("click", function () {
+                $.get("insert?type=giftcard", function (data) {
+                    console.log("Gift Card", data);
+                })
+            });
+
+            $.when(
+                $.get("jwt?type=loyalty", function (data) {
+                    saveToAndroidPay = document.createElement("g:savetoandroidpay");
+                    saveToAndroidPay.setAttribute("theme", "light");
+                    saveToAndroidPay.setAttribute("jwt", data);
+                    saveToAndroidPay.setAttribute("onsuccess", "successHandler");
+                    saveToAndroidPay.setAttribute("onfailure", "failureHandler");
+                    document.querySelector("#loyaltysave").appendChild(saveToAndroidPay);
+                }),
+                $.get("jwt?type=offer", function (data) {
+                    saveToAndroidPay = document.createElement("g:savetoandroidpay");
+                    saveToAndroidPay.setAttribute("theme", "light");
+                    saveToAndroidPay.setAttribute("jwt", data);
+                    saveToAndroidPay.setAttribute("onsuccess", "successHandler");
+                    saveToAndroidPay.setAttribute("onfailure", "failureHandler");
+                    document.querySelector("#offersave").appendChild(saveToAndroidPay);
+                }),
+                $.get("jwt?type=giftcard", function (data) {
+                    saveToAndroidPay = document.createElement("g:savetoandroidpay");
+                    saveToAndroidPay.setAttribute("theme", "light");
+                    saveToAndroidPay.setAttribute("jwt", data);
+                    saveToAndroidPay.setAttribute("onsuccess", "successHandler");
+                    saveToAndroidPay.setAttribute("onfailure", "failureHandler");
+                    document.querySelector("#giftcardsave").appendChild(saveToAndroidPay);
+                })).done(function () {
+                    script = document.createElement("script");
+                    script.src = "https://apis.google.com/js/plusone.js";
+                    document.head.appendChild(script);
+                });
+        }
+
+
+        $(window).ready(function () {
+            init();
+        });
+    </script>
+}
